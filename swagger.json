@@ -1,0 +1,1622 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Blockchain helpers API",
+        "description": "Transactions on the blockchain made easy",
+        "version": "0.0.1",
+        "license": {
+            "name": "Apache License Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://172.17.100.20:3000",
+            "description": "Local server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "ESDT Transactions"
+        },
+        {
+            "name": "NFT Transactions"
+        }
+    ],
+    "paths": {
+        "/esdt/issue": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Issue transaction",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Issue",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The new token ticker.",
+                                    "example": "NEWT"
+                                },
+                                "tokenName": {
+                                    "type": "string",
+                                    "description": "The new token name.",
+                                    "example": "My new token"
+                                },
+                                "initialSupply": {
+                                    "type": "number",
+                                    "description": "The initial supply of token.",
+                                    "example": 12000
+                                },
+                                "numberOfDecimals": {
+                                    "type": "number",
+                                    "description": "The number of decimals (beween 3-18).",
+                                    "example": 5
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "esdtProperties": {
+                                    "type": "object",
+                                    "properties": {
+                                        "canMint": {
+                                            "type": "boolean"
+                                        },
+                                        "canBurn": {
+                                            "type": "boolean"
+                                        },
+                                        "canPause": {
+                                            "type": "boolean"
+                                        },
+                                        "canFreeze": {
+                                            "type": "boolean"
+                                        },
+                                        "canWipe": {
+                                            "type": "boolean"
+                                        },
+                                        "canChangeOwner": {
+                                            "type": "boolean"
+                                        },
+                                        "canUpgrade": {
+                                            "type": "boolean"
+                                        },
+                                        "canAddSpecialRoles": {
+                                            "type": "boolean"
+                                        },
+                                        "canCreateMultiShard": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/transfer": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Transfer transaction",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Transfer",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The new token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToSendTo": {
+                                    "type": "string",
+                                    "description": "The address of the reciever - must be hex.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "valueToTransfer": {
+                                    "type": "number",
+                                    "description": "The value to transfer.",
+                                    "example": 200
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/setRole": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "setRole transaction",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "setRole",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The new token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToAssignRole": {
+                                    "type": "string",
+                                    "description": "The address of the reciever of the role - must be hex.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "roleToAssign": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ESDTRoleLocalBurn": {
+                                            "type": "boolean"
+                                        },
+                                        "ESDTRoleLocalMint": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/unSetRole": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Unsets roles",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "unSetRole",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToAssignRole": {
+                                    "type": "string",
+                                    "description": "The address of the reciever of the role - must be hex.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "roleToAssign": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ESDTRoleLocalBurn": {
+                                            "type": "boolean"
+                                        },
+                                        "ESDTRoleLocalMint": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/localMint": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Unsets roles",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "localMint",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "senderAddress": {
+                                    "type": "string",
+                                    "description": "The address of the sender - is the same as the address of current wallet.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "supplyToMint": {
+                                    "type": "number",
+                                    "example": 23122
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/localBurn": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Burns tokens",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "localBurn",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "senderAddress": {
+                                    "type": "string",
+                                    "description": "The address of the sender - is the same as the address of current wallet.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "supplyToBurn": {
+                                    "type": "number",
+                                    "example": 23122
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/pause": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Pauses token creation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "pause",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/unPause": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Unpauses token creation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "unPause",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/freeze": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Freeze account",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "freeze",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToFreeze": {
+                                    "type": "string",
+                                    "description": "The address that will be frozen.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/unFreeze": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Unfreeze account",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "unFreeze",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToUnFreeze": {
+                                    "type": "string",
+                                    "description": "The address that will be frozen.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/wipe": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Wipe",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "wipe",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "addressToWipe": {
+                                    "type": "string",
+                                    "description": "The address that will be frozen.",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/esdt/controlChanges": {
+            "post": {
+                "tags": ["ESDT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Control Changes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "coontrolChanges",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "The user's name.",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "The token ticker.",
+                                    "example": "NEWT-162"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "esdtProperties": {
+                                    "type": "object",
+                                    "properties": {
+                                        "canMint": {
+                                            "type": "boolean"
+                                        },
+                                        "canBurn": {
+                                            "type": "boolean"
+                                        },
+                                        "canPause": {
+                                            "type": "boolean"
+                                        },
+                                        "canFreeze": {
+                                            "type": "boolean"
+                                        },
+                                        "canWipe": {
+                                            "type": "boolean"
+                                        },
+                                        "canChangeOwner": {
+                                            "type": "boolean"
+                                        },
+                                        "canUpgrade": {
+                                            "type": "boolean"
+                                        },
+                                        "canAddSpecialRoles": {
+                                            "type": "boolean"
+                                        },
+                                        "canCreateMultiShard": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/create": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Control Changes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "create",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "Token identifier",
+                                    "example": "NEWT-162"
+                                },
+                                "initialQuantity": {
+                                    "type": "number",
+                                    "description": "The number of nfts, defaults to 1",
+                                    "example": 1
+                                },
+                                "nftName": {
+                                    "type": "string",
+                                    "description": "My nft name",
+                                    "example": "TestNFT"
+                                },
+                                "royalties": {
+                                    "type": "number",
+                                    "description": "Number of royalties",
+                                    "example": 200
+                                },
+                                "addressToSendTo": {
+                                    "type": "string",
+                                    "description": "Address to send nft to",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "URILinks": {
+                                    "type": "array",
+                                    "example": ["link1, link2, link3"]
+                                },
+                                "senderAddress": {
+                                    "type": "string",
+                                    "description": "Address of the sender",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "hash": {
+                                    "type": "string",
+                                    "description": "Hash",
+                                    "example": "exampleHash"
+                                },
+                                "attributes": {
+                                    "type": "string",
+                                    "description": "NFT attributes",
+                                    "example": "attributes"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/transfer": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Control Changes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "transfer",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "collectionIdenfier": {
+                                    "type": "string",
+                                    "description": "Collection identifier",
+                                    "example": "NEWT"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 1
+                                },
+                                "quantityToTransfer": {
+                                    "type": "number",
+                                    "description": "Nft qualtity to transfer",
+                                    "example": 1
+                                },
+                                "destinationAddress": {
+                                    "type": "string",
+                                    "description": "Address to send nft to",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/issue": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Control Changes",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "issue",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "tokenName": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "tokenTicker": {
+                                    "type": "string",
+                                    "description": "Collection identifier",
+                                    "example": "NEWT"
+                                },
+                                "nftProperties": {
+                                    "type": "object",
+                                    "properties": {
+                                        "canFreeze": {
+                                            "type": "boolean"
+                                        },
+                                        "canWipe": {
+                                            "type": "boolean"
+                                        },
+                                        "canPause": {
+                                            "type": "boolean"
+                                        },
+                                        "canTransferNFTCreateRole": {
+                                            "type": "boolean"
+                                        },
+                                        "canChangeOwner": {
+                                            "type": "boolean"
+                                        },
+                                        "canUpgrade": {
+                                            "type": "boolean"
+                                        },
+                                        "canAddSpecialRoles": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "networkProvider": {
+                                        "type": "string",
+                                        "description": "The network provider.",
+                                        "example": "https://devnet-api.multiversx.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/setSpecialRole": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Sets Special Roles",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "setSpecialRole",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "addressToAssignRole": {
+                                    "type": "string",
+                                    "description": "Address to assign role, needs to be hex: fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "rolesToAssign": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ESDTRoleNFTCreate": {
+                                            "type": "string",
+                                            "example": "ESDTRoleNFTCreate"
+                                        },
+                                        "ESDTRoleNFTBurn": {
+                                            "type": "string",
+                                            "example": "ESDTRoleNFTBurn"
+                                        },
+                                        "ESDTRoleNFTUpdateAttributes": {
+                                            "type": "string",
+                                            "example": "ESDTRoleNFTUpdateAttributes"
+                                        },
+                                        "canTransferNFTCreateRole": {
+                                            "type": "string",
+                                            "example": "canTransferNFTCreateRole"
+                                        },
+                                        "ESDTRoleNFTAddURI": {
+                                            "type": "string",
+                                            "example": "ESDTRoleNFTAddURI"
+                                        },
+                                        "ESDTTransferRole": {
+                                            "type": "string",
+                                            "example": "ESDTTransferRole"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/stopNftCreate": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Stops creation of nfts",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "stopCreate",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/transferNFTCreateRole": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Transfer the creator role",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "transferNFTCreateRole",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "addressToTransferFrom": {
+                                    "type": "string",
+                                    "description": "The address that currently has the role that we want to transfer",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                },
+                                "addressToTransferTo": {
+                                    "type": "string",
+                                    "description": "The address that will recieve the role",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/updateAttributes": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Transfer the creator role",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "updateAttributes",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 5
+                                },
+                                "attributes": {
+                                    "type": "string",
+                                    "description": "Attributes of nft",
+                                    "example": "someAttributesHere"
+                                },
+                                "senderAddress": {
+                                    "type": "string",
+                                    "description": "Current address - same as address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/addUri": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Transfer the creator role",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "addURI",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 5
+                                },
+                                "URILinks": {
+                                    "type": "array",
+                                    "description": "URI links to update",
+                                    "example": ["link1, link2, link3"]
+                                },
+                                "senderAddress": {
+                                    "type": "string",
+                                    "description": "Current address - same as address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/freezeSingleNft": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Freeze single nft",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "freezeSingleNft",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 5
+                                },
+                                "accountAddressToFreeze": {
+                                    "type": "string",
+                                    "description": "Current address - same as address",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/unFreezeSingleNft": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Unfreeze single nft",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "unFreezeSingleNft",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 5
+                                },
+                                "accountAddressToUnFreeze": {
+                                    "type": "string",
+                                    "description": "Current address - same as address",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/nft/wipeSingleNft": {
+            "post": {
+                "tags": ["NFT Transactions"],
+                "consumes": ["application/json"],
+                "description": "Wipe single nft",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "wipeSingleNft",
+                        "description": "Request body as following",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "address": {
+                                    "type": "string",
+                                    "description": "Current address",
+                                    "example": "erd1lv6eyd8mwprssw7qcx5zpghggcd95wxas27pwhyygsx75c5we5zskn5k8e"
+                                },
+                                "networkProvider": {
+                                    "type": "string",
+                                    "description": "The network provider.",
+                                    "example": "https://devnet-api.multiversx.com"
+                                },
+                                "tokenIdentifier": {
+                                    "type": "string",
+                                    "description": "My token name",
+                                    "example": "TestToken"
+                                },
+                                "nftNonce": {
+                                    "type": "number",
+                                    "description": "Nonce of the nft",
+                                    "example": 5
+                                },
+                                "accountAddressToWipe": {
+                                    "type": "string",
+                                    "description": "Current address - same as address",
+                                    "example": "fb359234fb7047083bc0c1a820a2e8461a5a38dd82bc175c84440dea628ecd05"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transactionData": {
+                                    "type": "object"
+                                },
+                                "transaction": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "Address from the data field is not hex format. Please provide a hex format address."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
